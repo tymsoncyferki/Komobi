@@ -10,7 +10,7 @@
 {% block content %}
     <div class="container-lg">
         <div class="form container-sm">
-            <h1>Create account</h1>
+            <h1>Załóż konto</h1>
             {% if message %}
                 <span style="color: red">{{ message }}</span>
             {% endif %}
@@ -19,12 +19,12 @@
                 <div class="mb-3">
                     <label for="email" class="form-label">Adres email</label>
                     <input type="email" class="form-control" name="email" id="email"
-                           placeholder="Enter your email address"
+                           placeholder="Wprowadź adres email"
                            required>
                 </div>
                 <div class="mb-3">
                     <label for="uname" class="form-label">Ksywka</label>
-                    <input type="text" class="form-control" name="uname" id="username" placeholder="Enter username"
+                    <input type="text" class="form-control" name="uname" id="username" placeholder="Wprowadź ksywkę"
                            pattern="[A-Za-z0-9]+" required>
                 </div>
                 <div class="filter-element mb-3">
@@ -37,16 +37,16 @@
                     </select>
                 </div>
                 <div class="mb-3">
-                    <label for="psw" class="form-label">Password</label>
-                    <input type="password" class="form-control" placeholder="Minimum 8 characters" name="psw"
+                    <label for="psw" class="form-label">Hasło</label>
+                    <input type="password" class="form-control" placeholder="Conajmniej 8 znaków" name="psw"
                            pattern="^.{8,}$" required>
                 </div>
                 <div class="mb-3">
-                    <label for="psw2" class="form-label">Repeat password</label>
-                    <input type="password" class="form-control" placeholder="Enter password" name="psw2"
+                    <label for="psw2" class="form-label">Powtórz hasło</label>
+                    <input type="password" class="form-control" placeholder="Wprowadź hasło" name="psw2"
                            pattern="^.{8,}$" required>
                 </div>
-                <button type="submit" form="register" class="btn btn-primary">Sign in</button>
+                <button type="submit" form="register" class="btn btn-primary">Zarejestruj się</button>
             </form>
             <br>
         </div>

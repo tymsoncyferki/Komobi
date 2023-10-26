@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Take or Upload a Photo</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+    <h1>Take or Upload a Photo</h1>
+    
+    <!-- Camera Capture -->
+    <div class="camera-container">
+        <video id="webcam" autoplay playsinline></video>
+        <img id="capturedPhoto" style="display: none;">
+    </div>
+    
+    <canvas id="canvas" style="display: none;"></canvas>
+    <button id="startCamera">Start Camera</button>
+    <button id="capturePhoto" style="display: none;">Capture Photo</button>
+    <button id="retakePhoto" style="display: none;">Retake Photo</button>
+    
+    <!-- Image Upload -->
+    <input type="file" accept="image/*" id="photoInput">
+
+    <!-- Form with "description" field and "submit" button -->
+    <form id="descriptionForm">
+        <label for="description">Description:</label>
+        <input type="text" id="description" name="description" required>
+        <button type="submit">Submit</button>
+    </form>
+    
+    
+    <script src="script.js"></script>
+</body>
+</html>
+

@@ -13,17 +13,21 @@
 {% block content %}
     <div class="container-lg">
         <div class="form container-sm">
-            <h2>Welcome, {{ username }}</h2>
+            <h2>Welcome, {{ user.username }}</h2>
             <table class="table table-borderless rf-table rounded-3 overflow-hidden text-white">
                 <tbody>
                 <tr class="rf-info-item">
                     <th>Email</th>
-                    <td class="data">{{ email }}</td>
+                    <td class="data">{{ user.email }}</td>
+                </tr>
+                                <tr class="rf-info-item">
+                    <th>Miasto</th>
+                    <td class="data">{{ user.first_name }}</td>
                 </tr>
                 </tbody>
             </table>
 
-            <h4 class="rider-header">Saved events</h4>
+            <h4 class="rider-header">Wysłane zgłoszenia</h4>
             <table class="standings table table-borderless overflow-hidden">
                 <tbody>
                 {% if issues %}
@@ -38,7 +42,7 @@
                     {% endfor %}
                 {% else %}
                     <span class="lead">
-                    No saved events
+                    Brak wysłanych zgłoszeń
                     </span>
                 {% endif %}
                 </tbody>
@@ -47,7 +51,7 @@
             <form method="post" action="{% url 'kapus:logout' %}">
                 {% csrf_token %}
                 <input type="hidden" name="logout" value="yes">
-                <button type="submit" class="btn btn-primary">Log out</button>
+                <button type="submit" class="btn btn-primary">Wyloguj się</button>
             </form>
         </div>
     </div>

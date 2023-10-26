@@ -17,7 +17,7 @@
 {% endblock %}
 
 {% block content %}
-    <div id="map" style="height: 500px;"></div>
+    <div id="map" style="height: 700px;"></div>
     <div id="confirmation-modal" class="modal text-dark" style="width: 300px">
         <div class="modal-dialog">
             <div class="modal-content" style="padding: 20px;">
@@ -40,7 +40,7 @@
         {% for item in issues %}
             var lmarker = L.marker([{{ item.latitude }}, {{ item.longitude }}]).addTo(map);
             // You can add a popup to display additional information if needed
-            lmarker.bindPopup("Problem: {{ item.title }} <br> Kategoria: {{ item.title }} <br> <a href={% url 'kapus:issue' item.id %}>Zobacz</a>").openPopup();
+            lmarker.bindPopup("Problem: {{ item.title }} <br> Kategoria: {{ item.category }} <br> <a href={% url 'kapus:issue' item.id %}>Zobacz</a>").openPopup();
         {% endfor %}
 
         map.on('click', function (e) {

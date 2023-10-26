@@ -10,25 +10,25 @@
 {% block content %}
     <div class="container-lg">
         <div class="form container-sm">
-            <h1>Login</h1>
+            <h1>Logowanie</h1>
             {% if message %}
                 <span style="color: red">{{ message }}</span>
             {% endif %}
             <form method="POST" id="login" action="{% url 'kapus:login' %}">
                 {% csrf_token %}
                 <div class="mb-3">
-                    <label for="uname" class="form-label">Username</label>
-                    <input type="text" class="form-control" name="uname" id="username" placeholder="Enter username"
+                    <label for="uname" class="form-label">Nazwa użytkownika</label>
+                    <input type="text" class="form-control" name="uname" id="username" placeholder="Wprowadź nazwę użytkownika"
                            required>
                 </div>
                 <div class="mb-3">
                     <label for="psw" class="form-label">Password</label>
-                    <input type="password" class="form-control" placeholder="Enter password" name="psw" required>
+                    <input type="password" class="form-control" placeholder="Wprowadź hasło" name="psw" required>
                 </div>
-                <button type="submit" form="login" class="btn btn-primary">Log in</button>
+                <button type="submit" form="login" class="btn btn-primary">Zaloguj się</button>
             </form>
             <br>
-            Do not have an account yet? Sign up <a href="{% url 'kapus:register' %}">here</a>
+            Nie masz jeszcze konta? Zarejestruj się <a href="{% url 'kapus:register' %}">tutaj</a>
         </div>
     </div>
 

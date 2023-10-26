@@ -4,18 +4,19 @@ from django.db import models
 from datetime import datetime
 
 
+
+
 class Issue(models.Model):
-    STATUS_CHOICES = (
-        ('open', 'Otwarte'),
-        ('closed', 'Zamknięte'),
-        ('pending', 'Oczekujące'),
-    )
     title = models.CharField(max_length=255, default="")
     category = models.CharField(max_length=100, default="Transport")
     time = models.DateTimeField(auto_now_add=True, blank=True)
-    photo = models.ImageField(blank=True)
-    status = models.CharField(max_length=100, choices=STATUS_CHOICES, default="pending")
+    photo = models.CharField(max_length=255, default="")
+    status = models.CharField(max_length=100, default="Przyjęte")
     description = models.TextField(default="")
     latitude = models.FloatField()
     longitude = models.FloatField()
 
+    def __str__(self):
+        return self.title
+
+    status_options = ['Przyjęte', 'W trakcie realizacji', 'Zakończone', 'Odrzucone']

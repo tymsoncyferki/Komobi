@@ -6,6 +6,7 @@
     {% load static %}
     <link href="{% static 'kapus/stylesheets/index.css' %}" rel="stylesheet">
     <link href="{% static 'kapus/stylesheets/footer.css' %}" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'kapus/stylesheets/style.css' %}">
 {% endblock %}
 
 {% block content %}
@@ -23,17 +24,47 @@
                            placeholder="Tytuł zgłoszenia"
                            required>
                 </div>
-                <div class="filter-element mb-3">
-                <label for="category" class="form-label">Kategoria</label>
-                    <select class="form-select filter-select" name="category" id="category" required>
+
+                <div class="mb-3">
+                    <label for="category" class="form-label">Kategoria</label>
+                    <select class="form-select" name="category" id="category" required>
                         <option>Wybierz kategorię</option>
                         {% for category in categories %}
                             <option value="{{ category }}">{{ category }}</option>
                         {% endfor %}
                     </select>
                 </div>
-                <label for="photo">Dodaj zdjęcie zgłoszenie</label>
-                <button class="btn btn-primary" id="photo" disabled>Dodaj zdjecie</button>
+                <div class="mb-3">
+                    <label for="photo">Dodaj zdjęcie zgłoszenia</label>
+                    <div class="camera-container">
+                        <video id="webcam" autoplay playsinline></video>
+                        <img id="capturedPhoto" style="display: none;">
+                    </div>
+                </div>
+                <input type="hidden" name="photo" id="photo">
+                <canvas id="canvas" style="display: none;"></canvas>
+                <br>
+                <button type="button" id="startCamera" class="btn btn-primary">Włącz aparat</button>
+
+                <button type="button" id="capturePhoto" style="display: none; align-content: center" class="btn btn-primary">Zrób
+                    zdjęcie
+                </button>
+                <button type="button" id="retakePhoto" style="display: none;" class="btn btn-primary">Powtórz zdjęcie</button>
+                <span> lub</span>
+                <br>
+                <br>
+
+                <!-- Image Upload -->
+                <label for="photoInput">
+                    <input type="file" accept="image/*" id="photoInput" class="btn btn-primary">
+                </label>
+                <br>
+                <br>
+                <label for="description">Dodaj opis</label>
+                <br>
+                <textarea id="description" name="description" rows="4" cols="40" class="rounded-3"
+                          style="overflow: hidden" required></textarea>
+
                 <br>
                 <br>
                 <input type="hidden" name="lat" value="{{ lat }}">
@@ -43,4 +74,5 @@
             <br>
         </div>
     </div>
+    <script src="{% static 'kapus/stylesheets/script.js' %}"></script>
 {% endblock %}

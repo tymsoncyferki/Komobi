@@ -6,18 +6,107 @@
     {% load static %}
     <link href="{% static 'kapus/stylesheets/index.css' %}" rel="stylesheet">
     <link href="{% static 'kapus/stylesheets/footer.css' %}" rel="stylesheet">
+    <link href="{% static 'kapus/stylesheets/footer.css' %}" rel="stylesheet">
+    <link href="{% static 'kapus/stylesheets/rider.css' %}" rel="stylesheet">
+    <link href="{% static 'kapus/stylesheets/event.css' %}" rel="stylesheet">
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+          integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+          crossorigin=""/>
+    <!-- Make sure you put this AFTER Leaflet's CSS -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+            integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+            crossorigin=""></script>
 {% endblock %}
 
 {% block content %}
-    <div class="container-md text-center">
-    <h2>Zgłoszenie nr {{ issue.id }}</h2>
+    <div class="container-sm">
+        <h2>Zgłoszenie nr {{ issue.id }}</h2>
+
+        <table class="table table-borderless rf-table rounded-3 overflow-hidden text-white">
+            <tbody>
+            <tr class="rf-info-item">
+                <th>Status</th>
+                <td class="data">{{ issue.status }}</td>
+            </tr>
+            <tr class="rf-info-item">
+                <th>Tytuł</th>
+                <td class="data">{{ issue.title }}</td>
+            </tr>
+            <tr class="rf-info-item">
+                <th>Kategoria</th>
+                <td class="data">{{ issue.category }}</td>
+            </tr>
+            <tr class="rf-info-item">
+                <th>Data</th>
+                <td class="data">{{ issue.time }}</td>
+            </tr>
+            <tr class="rf-info-item">
+                <th>Description</th>
+                <td class="data">{{ issue.description }}</td>
+            </tr>
+            <tr class="rf-info-item">
+                <th>Pliki</th>
+                <td class="data"><a href="#">{{ issue.photo }}</a></td>
+            </tr>
+            </tbody>
+        </table>
     <br>
-    <strong>Tytuł:</strong> {{ issue.title }}
-        <br>
-    <strong>Kategoria:</strong> {{ issue.category }}
-        <br>
-    <strong>Data i czas:</strong> {{ issue.time }}
+        {% if issue.id == 3 %}
+            Przed:
+            <img src="https://media.wired.com/photos/59269d64cfe0d93c47430d6b/master/w_1920,c_limit/Before-623639136.jpg" height="150px">
+            Po:
+            <img src="https://www.boredpanda.com/blog/wp-content/uploads/2016/11/sinkhole-fix-fukuoka-japan-2.jpg" height="150px" >
+        {% endif %}
+    <br>
+    <br>
+    <br>
+
+        <div id="map" style="height: 200px;"></div>
+<br>
+        <label class="form label">Napisz komentarz</label>
+
+    <input type="text" id="comment" class="form-control">
+    <button type="button" id="addCommentButton" class=" mt-2 btn btn-primary">Dodaj</button>
+
+    <br>
+    <br>
+    <h3>Komentarze</h3>
+    <i id="author"></i><span id="comm"></span>
     </div>
 
+
+
+    <script>
+        var map = L.map('map').setView([{{ issue.latitude }}, {{ issue.longitude }}], 13);
+        var previousMarker = null;
+        L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+        }).addTo(map);
+
+            var lmarker = L.marker([{{ issue.latitude }}, {{ issue.longitude }}]).addTo(map);
+            // You can add a popup to display additional information if needed
+            lmarker.bindPopup("Problem: {{ issue.title }} <br> Kategoria: {{ issue.category }} <br> <a href={% url 'kapus:issue' issue.id %}>Zobacz</a>").openPopup();
+
+        const commentInput = document.getElementById("comment");
+    const addCommentButton = document.getElementById("addCommentButton");
+    const commElement = document.getElementById("comm");
+    const authorElement = document.getElementById("author");
+
+    // Set the author to "StraznikGrochowa"
+
+
+    // Add a click event listener to the "Dodaj" button
+    addCommentButton.addEventListener("click", function () {
+        // Get the text from the input field
+        const commentText = commentInput.value;
+        authorElement.textContent = "StraznikGrochowa~ ";
+        // Update the "comm" element with the comment text
+        commElement.textContent = commentText;
+
+        // Clear the input field
+        commentInput.value = "";
+    });
+    </script>
 {% endblock %}
 

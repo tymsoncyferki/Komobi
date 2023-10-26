@@ -11,6 +11,8 @@ def index(request):
 
 
 def map(request):
+    if not request.user.is_authenticated:
+        return redirect('kapus:login')
     issues = Issue.objects.all()
 
     return render(request, 'kapus/map.html', {"issues": issues})
@@ -31,18 +33,21 @@ def issue_form(request):
     if request.method == "POST":
         title = request.POST['title']
         category = request.POST['category']
-
+        description = request.POST['description']
         lat = request.POST['lat']
         long = request.POST['long']
-        issue = Issue(title=title, category=category, latitude=lat, longitude=long)
-        issue.save()
 
-        return redirect('kapus:issue', issue_id = issue.id)
+        issue = Issue(title=title, category=category, description=description, latitude=lat, longitude=long)
+        issue.save()
+        photo = request.POST['photo'] + str(issue.id)
+        issue.photo = photo
+        issue.save()
+        return redirect('kapus:issue', issue_id=issue.id)
 
     lat = request.GET.get('lat')
     long = request.GET.get('long')
 
-    categories = ['Parkowanie', 'Nawierzchnia', 'Komunikacja miejska']
+    categories = ['Infrastruktura', 'Bezpieczeństwo', 'Komunikacja miejska']
 
     return render(request, 'kapus/issue_form.html', {'lat': lat, 'long': long, 'categories': categories})
 
@@ -65,7 +70,7 @@ def login_view(request):
 
 def logout_view(request):
     logout(request)
-    return redirect('wiki:login')
+    return redirect('kapus:login')
 
 
 def register_view(request):
@@ -93,7 +98,7 @@ def register_view(request):
             message = "Passwords do not match"
             return render(request, 'kapus/registration/register.html', {"message": message})
 
-        user = User(email=email, username=username)
+        user = User(email=email, username=username, first_name=city)
         user.set_password(password)
         user.save()
         login(request, user)
@@ -102,13 +107,11 @@ def register_view(request):
         return redirect('kapus:account')
     else:
         cities = ['Katowice', 'Warszawa', 'Poznan', 'Krakow', 'Gdansk', 'Szczecin', 'Jazgarzewszczyzna']
-        return render(request, 'kapus/registration/register.html')
+        return render(request, 'kapus/registration/register.html', {'cities': cities})
 
 
 def account(request):
     if request.user.is_authenticated:
-        username = request.user.username
-        email = request.user.email
-        return render(request, 'kapus/registration/account.html', {"username": username, "email": email})
+        return render(request, 'kapus/registration/account.html', {"user": request.user})
     else:
         return redirect('kapus:login')
