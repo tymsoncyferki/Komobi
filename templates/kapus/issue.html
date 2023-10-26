@@ -1,0 +1,23 @@
+{% extends 'kapus/base.html' %}
+
+{% block title %}Slopestyle and Dirt Jumping Database | RideFMB{% endblock %}
+
+{% block head %}
+    {% load static %}
+    <link href="{% static 'kapus/stylesheets/index.css' %}" rel="stylesheet">
+    <link href="{% static 'kapus/stylesheets/footer.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+    <div class="container-md text-center">
+    <h2>Zgłoszenie nr {{ issue.id }}</h2>
+    <br>
+    <strong>Tytuł:</strong> {{ issue.title }}
+        <br>
+    <strong>Kategoria:</strong> {{ issue.category }}
+        <br>
+    <strong>Data i czas:</strong> {{ issue.time }}
+    </div>
+
+{% endblock %}
+

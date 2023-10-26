@@ -1,0 +1,55 @@
+{% extends 'kapus/base.html' %}
+
+{% block title %}{{ username }} account | RideFMB{% endblock %}
+
+{% block head %}
+    {% load static %}
+    <link href="{% static 'kapus/stylesheets/footer.css' %}" rel="stylesheet">
+    <link href="{% static 'kapus/stylesheets/rider.css' %}" rel="stylesheet">
+    <link href="{% static 'kapus/stylesheets/event.css' %}" rel="stylesheet">
+    <link href="{% static 'kapus/stylesheets/search.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+    <div class="container-lg">
+        <div class="form container-sm">
+            <h2>Welcome, {{ username }}</h2>
+            <table class="table table-borderless rf-table rounded-3 overflow-hidden text-white">
+                <tbody>
+                <tr class="rf-info-item">
+                    <th>Email</th>
+                    <td class="data">{{ email }}</td>
+                </tr>
+                </tbody>
+            </table>
+
+            <h4 class="rider-header">Saved events</h4>
+            <table class="standings table table-borderless overflow-hidden">
+                <tbody>
+                {% if issues %}
+                    {% for issue in issues %}
+
+                        <tr class="search-item">
+                            <td>
+                                <br>
+                                <span class="search-item-desc">{{ issue.title }}</span>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                {% else %}
+                    <span class="lead">
+                    No saved events
+                    </span>
+                {% endif %}
+                </tbody>
+            </table>
+
+            <form method="post" action="{% url 'kapus:logout' %}">
+                {% csrf_token %}
+                <input type="hidden" name="logout" value="yes">
+                <button type="submit" class="btn btn-primary">Log out</button>
+            </form>
+        </div>
+    </div>
+
+{% endblock %}

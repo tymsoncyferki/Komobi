@@ -1,0 +1,25 @@
+{% extends 'kapus/base.html' %}
+
+{% block title %}Slopestyle and Dirt Jumping Database | RideFMB{% endblock %}
+
+{% block head %}
+    {% load static %}
+    <link href="{% static 'kapus/stylesheets/index.css' %}" rel="stylesheet">
+    <link href="{% static 'kapus/stylesheets/footer.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+    <div class="text-center container-lg">
+        <div style="margin-top: 20px">
+            <h1>Komobi</h1>
+            <br>
+            <p class="text-center m-auto subtitle">Witaj w Komobi gdzie sąsiad cię podpierdoli!</p>
+        </div>
+        <br>
+        <a class="btn btn-primary" href="{% url 'kapus:map' %}">Zgłoś Problem</a>
+
+
+    </div>
+
+{% endblock %}
+

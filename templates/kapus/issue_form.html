@@ -1,0 +1,46 @@
+{% extends 'kapus/base.html' %}
+
+{% block title %}Slopestyle and Dirt Jumping Database | RideFMB{% endblock %}
+
+{% block head %}
+    {% load static %}
+    <link href="{% static 'kapus/stylesheets/index.css' %}" rel="stylesheet">
+    <link href="{% static 'kapus/stylesheets/footer.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+    <div class="container-lg">
+        <div class="form container-sm">
+            <h1>Złóż zgłoszenie</h1>
+            {% if message %}
+                <span style="color: red">{{ message }}</span>
+            {% endif %}
+            <form method="POST" id="register" action="{% url 'kapus:form' %}">
+                {% csrf_token %}
+                <div class="mb-3">
+                    <label for="title" class="form-label">Tytuł</label>
+                    <input type="text" class="form-control" name="title" id="title"
+                           placeholder="Tytuł zgłoszenia"
+                           required>
+                </div>
+                <div class="filter-element mb-3">
+                <label for="category" class="form-label">Kategoria</label>
+                    <select class="form-select filter-select" name="category" id="category" required>
+                        <option>Wybierz kategorię</option>
+                        {% for category in categories %}
+                            <option value="{{ category }}">{{ category }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <label for="photo">Dodaj zdjęcie zgłoszenie</label>
+                <button class="btn btn-primary" id="photo" disabled>Dodaj zdjecie</button>
+                <br>
+                <br>
+                <input type="hidden" name="lat" value="{{ lat }}">
+                <input type="hidden" name="long" value="{{ long }}">
+                <button type="submit" form="register" class="btn btn-primary">Wyślij</button>
+            </form>
+            <br>
+        </div>
+    </div>
+{% endblock %}

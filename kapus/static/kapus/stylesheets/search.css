@@ -1,0 +1,33 @@
+.search-link {
+    text-decoration-thickness: 1px !important;
+}
+
+.search-item-desc {
+    /*color: var(--rf-border)*/
+    color: var(--rf-lightgrey);
+}
+
+/*.search-item {*/
+/*    min-height: 60px;*/
+/*    padding: 10px 0 10px 5px;*/
+/*}*/
+
+.search-table {
+    border-collapse: separate;
+    border-spacing: 0 10px;
+    padding-left: 10px;
+}
+.rf-table-rider-photo {
+    min-width: 60px;
+}
+
+a {
+    color: var(--rf-primary-light);
+    text-decoration: none;
+}
+
+a:hover,
+a:focus {
+    color: var(--rf-primary-light);
+    text-decoration: underline;
+}

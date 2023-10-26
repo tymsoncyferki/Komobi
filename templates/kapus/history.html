@@ -1,0 +1,36 @@
+{% extends 'kapus/base.html' %}
+
+{% block title %}Slopestyle and Dirt Jumping Database | RideFMB{% endblock %}
+
+{% block head %}
+    {% load static %}
+    <link href="{% static 'kapus/stylesheets/index.css' %}" rel="stylesheet">
+    <link href="{% static 'kapus/stylesheets/footer.css' %}" rel="stylesheet">
+    <link href="{% static 'kapus/stylesheets/ranking.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+    <div class=" container-lg">
+    <h1>Archiwum zgłoszeń</h1>
+        <table class="table table-borderless rf-table rounded-4 overflow-hidden text-white">
+            <thead class="rf-table-header rounded-3">
+            <tr>
+                <th class="text-center" scope="col">ID</th>
+                <th class= scope="col">Tytuł</th>
+                <th scope="col">Status</th>
+            <tr>
+            </thead>
+            <tbody>
+            {% for issue in issues %}
+                <tr>
+                    <td class="text-center">{{ issue.id }}</td>
+                    <td><a href="{% url 'kapus:issue' issue.id %}">{{ issue.title }}</a></td>
+                    <td>{{ issue.status }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+{% endblock %}
+

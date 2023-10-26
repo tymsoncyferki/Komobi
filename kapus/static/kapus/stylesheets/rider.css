@@ -1,0 +1,52 @@
+a:hover,
+a:focus {
+    color: var(--rf-primary);
+    text-decoration: underline;
+}
+
+.photo-holder {
+    min-width: 250px;
+}
+
+.rider-photo {
+    max-width: 200px;
+}
+
+.rf-info-item {
+    border-top: 1px solid rgba(20, 20, 20, .5);
+    background-color: transparent;
+}
+
+.rider-part {
+    margin-left: 0;
+    padding-bottom: 10px;
+}
+
+.event-info {
+    color: var(--rf-grey);
+}
+
+ul, ol li::marker {
+  color: var(--rf-grey);
+}
+
+.event-list {
+    margin-left: 0;
+    padding-left: 1rem;
+    margin-bottom: 0;
+}
+
+.lead {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.rider-header {
+    margin-top: 20px;
+    padding-bottom: 2px;
+    border-bottom: 1px solid var(--rf-border-2);
+}
+
+.source-link {
+    word-wrap: break-word;
+}
