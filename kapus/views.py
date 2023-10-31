@@ -51,6 +51,7 @@ def issue_form(request):
 
     return render(request, 'kapus/issue_form.html', {'lat': lat, 'long': long, 'categories': categories})
 
+
 def login_view(request):
     if request.method == 'POST':
         username = request.POST["uname"]
