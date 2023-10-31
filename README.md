@@ -1,2 +1,2 @@
-# Go60
+# Komobi
 kapus kapus kapus kapus
